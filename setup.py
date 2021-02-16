@@ -3,17 +3,27 @@ from distutils.extension import Extension
 from Cython.Build import cythonize
 
 ext_modules = [
-    Extension("henlo",
-         ["henloTest.pyx", "includes/henlo.cpp"],
-         include_dirs=["includes"],
-         depends=["includes/henlo.h"],
-        extra_compile_args=['/openmp'],
-        extra_link_args=['/openmp'],
+    Extension("henlo.wrapper",
+        sources=[
+            "henlo/wrapper.pyx",
+            "henlo/lib/henlo.cpp"
+        ],
+        # include_dirs=["henlo/lib"],
+        # depends=["henlo/lib/henlo.h"],
+        # extra_compile_args=['/openmp'],
+        # extra_link_args=['/openmp'],
+        # language="c++",
+    ),
+    Extension("henlo.subpkg.util",
+        sources=[
+            "henlo/subpkg/util.pyx",
+        ],
     )
 ]
 setup(
     ext_modules=cythonize(ext_modules),
-    name='nauka',
+    zip_safe=False,
+    name='hw',
     version='0.1',
     packages=['cython'],
     url='lols',
