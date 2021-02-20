@@ -4,7 +4,8 @@
 
 cimport libWarp
 
-# from .subpkg import util
+# # imported version
+# from .subpkg import util # if python type used in function cimport don't work properly fur such function
 #
 # cpdef test(str name):
 #     cdef:
@@ -12,6 +13,7 @@ cimport libWarp
 #         char* s = b
 #     libWarp.henlo(s)
 
+# single file version
 cdef char* _chars(str pystring):
     cdef:
         bytes bstr = pystring.encode('utf-8')
